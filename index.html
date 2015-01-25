@@ -67,23 +67,27 @@
 
     <!-- submit function -->
     <script>
+      var i = 1;
+      /*function deleteItem(event){
+        var elem = event.data.elem;
+        $(elem).parent().remove();
+      }*/
       function submitPost() {
         var title = $("#stock_title").val();
-        $("#stock_name").append($("<li></li>").html($("<div> </div>").addClass("title_left").html(title)).append($("<btn> </btn>").html("Delete").addClass("delete_right btn btn-danger")));
+        var stockid = "stock"+i;
+        $("#stock_name")
+          .append($("<li />").html($("<div />").attr({class: "title_left", id: stockid}).html(title))
+          .append($("<button> </button>").attr({class: "delete_right btn btn-danger", id: stockid}).html("Delete").click(function(){
+              $(this).parent().remove();
+
+          }
+
+
+            )));
+        i++;
 
       }
-    </script>
-    <!-- Keep track of User's input -->
-    <script>
-        $("#stock_title").on("keyup change", function() {
-          var value = this.value;
-           $("#stock_name").text(value);
-        });
 
-        var theResult = document.getElementsById("#stock_title");
-        alert(theResult);
-
-        // document.getElementsById("stock_name").innerHTML = String(stock_name);
 
     </script>
 
