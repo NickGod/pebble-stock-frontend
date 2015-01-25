@@ -15,6 +15,7 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+	<script src="bower_components/jquery/dist/jquery.js"></script>
     <!-- endbuild -->
   </head>
   <body>
@@ -71,6 +72,44 @@
     <script>
       var i = 1;
 
+		$(document).ready(function(){
+			var response;
+			var req = new XMLHttpRequest();
+			
+			// build the GET request
+			req.open('GET', "http://mqchau.pythonanywhere.com/oldSymbols", true);
+			req.onload = function(e) {
+				if (req.readyState == 4) {
+					// 200 - HTTP OK
+					if(req.status == 200) {
+						console.log(req.responseText);
+						response = JSON.parse(req.responseText);
+						var symbols = response.symbols;
+						for (var symbol in symbols){
+							$("#stock_name")
+							  .append($("<li />").html($("<div />").addClass("title_left").html(symbol))
+							  .append($("<button> </button>").addClass("delete_right btn btn-danger").html("Delete").click(function(){
+								  $(this).parent().remove();
+
+							  })));
+						}
+					} else {
+						console.log("Request returned error code " + req.status.toString());
+					}
+				}
+				current_idx++;
+				if (current_idx == symbols.length) {
+					current_idx = 0; 
+					global_notify_idx = 0;
+					console.log("final notify list : " + JSON.stringify(notify_list));
+					notifyPebble();
+				} else fetchStockQuote(current_idx);
+				//setTimeout(fetchStockQuote, 500);
+			};
+			req.send(null);
+		});
+	 
+
       function submitPost() {
         var title = $("#stock_title").val();
         var stockid = "stock"+i;
@@ -107,6 +146,7 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
+
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
     <!-- endbower -->
