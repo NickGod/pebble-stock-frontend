@@ -69,7 +69,7 @@
     <script>
       function submitPost() {
         var title = $("#stock_title").val();
-        $("#stock_name").append($("<li></li>").html($("<div> </div>").addClass("title_left").html(title)).append($("<div> </div>").html("Test").addClass("delete_right")));
+        $("#stock_name").append($("<li></li>").html($("<div> </div>").addClass("title_left").html(title)).append($("<btn> </btn>").html("Delete").addClass("delete_right btn btn-danger")));
 
       }
     </script>
