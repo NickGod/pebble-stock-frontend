@@ -1,6 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head>
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+
     <meta charset="utf-8">
     <title></title>
     <meta name="description" content="">
@@ -68,22 +70,16 @@
     <!-- submit function -->
     <script>
       var i = 1;
-      /*function deleteItem(event){
-        var elem = event.data.elem;
-        $(elem).parent().remove();
-      }*/
+
       function submitPost() {
         var title = $("#stock_title").val();
         var stockid = "stock"+i;
         $("#stock_name")
           .append($("<li />").html($("<div />").attr({class: "title_left", id: stockid}).html(title))
           .append($("<button> </button>").attr({class: "delete_right btn btn-danger", id: stockid}).html("Delete").click(function(){
-              $(this).parent().remove();
-
-          }
-
-
-            )));
+              $(this).parent().remove();}))
+          .append($("</br> </br>"))
+          );
         i++;
 
       }
@@ -111,7 +107,6 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
     <!-- endbower -->

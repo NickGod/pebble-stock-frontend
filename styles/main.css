@@ -7,8 +7,9 @@
 /* styles right delete button */
 .delete_right {
   display: inline-block;
-  width: 50%;
-  margin-right: 0;
+
+  width: 30%;
+  right: 0;
 }
 /* Space out content a bit */
 body {
